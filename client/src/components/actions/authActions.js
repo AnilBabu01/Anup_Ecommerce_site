@@ -72,6 +72,7 @@ export const register = (userData) => async (dispatch) => {
 
 export const login = (email, password) => async (dispatch) => {
   axios.defaults.withCredentials = true;
+
   try {
     dispatch({ type: LOGIN_REQUEST });
 
@@ -104,7 +105,10 @@ export const login = (email, password) => async (dispatch) => {
 //loader user
 export const loadUser = () => async (dispatch) => {
   try {
-    dispatch({ type: LOAD_USER_REQUEST });
+    axios.defaults.headers.get[
+      "Authorization"
+    ] = `Bearer ${localStorage.getItem("token")}`;
+
     const config = {
       headers: {
         "Content-Type": "application/json",
@@ -130,6 +134,10 @@ export const loadUser = () => async (dispatch) => {
 // Logout user
 export const logout = () => async (dispatch) => {
   try {
+    axios.defaults.headers.get[
+      "Authorization"
+    ] = `Bearer ${localStorage.getItem("token")}`;
+
     await axios.get(`${process.env.REACT_APP_URL}/api/auth/logout`);
 
     dispatch({
@@ -146,6 +154,9 @@ export const logout = () => async (dispatch) => {
 // Update profile
 export const updateProfile = (userData) => async (dispatch) => {
   try {
+    axios.defaults.headers.put[
+      "Authorization"
+    ] = `Bearer ${localStorage.getItem("token")}`;
     dispatch({ type: UPDATE_PROFILE_REQUEST });
 
     const config = {
@@ -175,6 +186,9 @@ export const updateProfile = (userData) => async (dispatch) => {
 // Update password
 export const updatePassword = (passwords) => async (dispatch) => {
   try {
+    axios.defaults.headers.put[
+      "Authorization"
+    ] = `Bearer ${localStorage.getItem("token")}`;
     dispatch({ type: UPDATE_PASSWORD_REQUEST });
 
     const config = {
@@ -204,6 +218,9 @@ export const updatePassword = (passwords) => async (dispatch) => {
 // Forgot password
 export const forgotPassword = (email) => async (dispatch) => {
   try {
+    axios.defaults.headers.post[
+      "Authorization"
+    ] = `Bearer ${localStorage.getItem("token")}`;
     dispatch({ type: FORGOT_PASSWORD_REQUEST });
 
     const config = {
@@ -233,6 +250,9 @@ export const forgotPassword = (email) => async (dispatch) => {
 // Reset password
 export const resetPassword = (token, passwords) => async (dispatch) => {
   try {
+    axios.defaults.headers.put[
+      "Authorization"
+    ] = `Bearer ${localStorage.getItem("token")}`;
     dispatch({ type: NEW_PASSWORD_REQUEST });
 
     const config = {
@@ -262,6 +282,10 @@ export const resetPassword = (token, passwords) => async (dispatch) => {
 // Get all users
 export const allUsers = () => async (dispatch) => {
   try {
+    axios.defaults.headers.get[
+      "Authorization"
+    ] = `Bearer ${localStorage.getItem("token")}`;
+
     dispatch({ type: ALL_USERS_REQUEST });
 
     const { data } = await axios.get(
@@ -283,6 +307,9 @@ export const allUsers = () => async (dispatch) => {
 // Update user - ADMIN
 export const updateUser = (id, userData) => async (dispatch) => {
   try {
+    axios.defaults.headers.put[
+      "Authorization"
+    ] = `Bearer ${localStorage.getItem("token")}`;
     dispatch({ type: UPDATE_USER_REQUEST });
 
     const config = {
@@ -297,6 +324,7 @@ export const updateUser = (id, userData) => async (dispatch) => {
       config
     );
 
+    console.log("data form update api", data, userData);
     dispatch({
       type: UPDATE_USER_SUCCESS,
       payload: data.success,
@@ -312,6 +340,10 @@ export const updateUser = (id, userData) => async (dispatch) => {
 // Get user details - ADMIN
 export const getUserDetails = (id) => async (dispatch) => {
   try {
+    axios.defaults.headers.get[
+      "Authorization"
+    ] = `Bearer ${localStorage.getItem("token")}`;
+
     dispatch({ type: USER_DETAILS_REQUEST });
 
     const { data } = await axios.get(
@@ -333,6 +365,9 @@ export const getUserDetails = (id) => async (dispatch) => {
 // Delete user - ADMIN
 export const deleteUser = (id) => async (dispatch) => {
   try {
+    axios.defaults.headers.delete[
+      "Authorization"
+    ] = `Bearer ${localStorage.getItem("token")}`;
     dispatch({ type: DELETE_USER_REQUEST });
 
     const { data } = await axios.delete(

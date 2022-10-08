@@ -25,7 +25,7 @@ const UpdateProfile = () => {
     if (user) {
       setName(user.name);
       setEmail(user.email);
-      setAvatarPreview(user.avatar.url);
+      setAvatarPreview(user.avatar);
     }
     if (error) {
       alert.error(error);
@@ -40,7 +40,7 @@ const UpdateProfile = () => {
         type: UPDATE_PROFILE_RESET,
       });
     }
-  }, [dispatch, alert, isUpdated]);
+  }, [dispatch, alert, isUpdated, user]);
   /// fontion for updateprofile
   const submitHandler = (e) => {
     e.preventDefault();
@@ -48,23 +48,13 @@ const UpdateProfile = () => {
     const formData = new FormData();
     formData.set("name", name);
     formData.set("email", email);
-    formData.set("avatar", avatar);
+    formData.set("avatar", avatar, avatar.name);
 
     dispatch(updateProfile(formData));
   };
   const onChange = (e) => {
-    const reader = new FileReader();
-
-    reader.onload = () => {
-      if (reader.readyState === 2) {
-        setAvatarPreview(reader.result);
-        setAvatar(reader.result);
-
-        console.log(reader.result);
-      }
-    };
-
-    reader.readAsDataURL(e.target.files[0]);
+    setAvatar(e.target.files[0]);
+    setAvatarPreview(URL.createObjectURL(e.target.files[0]));
   };
   return (
     <Fragment>

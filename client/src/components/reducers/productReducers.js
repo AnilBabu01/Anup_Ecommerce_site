@@ -105,6 +105,7 @@ export const productDetailsReducer = (state = { product: {} }, action) => {
       return state;
   }
 };
+
 // new review reducer
 export const newReviewReducer = (state = {}, action) => {
   switch (action.type) {

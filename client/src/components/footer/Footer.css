@@ -1,0 +1,113 @@
+.mainfooter{
+    background-color: black;
+
+}
+
+.footercontent{
+    display: flex;
+    justify-content: space-around;
+    padding-top: 80px;
+    color: white;
+}
+
+.mardivcontent{
+    margin-top: 20px;
+    color:  #B4ABAB;
+    font-size: 65px;
+}
+
+.mardivcontent1{
+    margin-top: 20px;
+   font-size: 65px;
+}
+
+.right{
+    padding-left: 10px;
+    color:  #B4ABAB;
+    font-size: 65px;
+
+}
+.pincodediv{
+    display: flex;
+    justify-content: space-between;
+    padding-left: 50px;
+    padding-right: 50px;
+    margin-top: 10px;
+    color: white;
+}
+.iconmain{
+    width: 60px;
+    height: 60px;
+    background-color: white;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    border-radius: 30px;
+    margin: 12px;
+}
+.hrdiv{
+    width: 100%;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+.social{
+    display: flex;
+    justify-content: center;
+}
+.icondiv5{
+
+    box-shadow: 1px 1px 1px 0px #f3e6e6 !important;
+    padding: 20px !important;
+    margin-bottom: 10px !important;
+    background-color: black !important;
+    color: white !important;
+    border-radius: 23px !important;
+    height: 50px !important;
+    width: 50px !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+.icondiv5:hover{
+    border-radius: 26px !important;
+    height: 55px !important;
+    width: 55px !important;
+    margin-top: 8px;
+    transition: width 0.2s;
+    transition: height 0.2s;
+}
+.instatxt{
+    font-weight: 400;
+}
+.dilimg {
+
+    width: 20px;
+}
+@media screen and (max-width: 780px) {
+      
+.footercontent{
+    display: block!important;
+    margin-left: 50px;
+  
+  }
+  .phonecon{
+    margin-top: 20px;
+  }
+  
+.mardivcontent{
+    margin-top: 0px;
+}
+
+.svgphone{
+    width: 20px;
+    height: 20px;
+}
+.pincodediv{
+    display: block;
+  
+    padding-left: 50px;
+    padding-right: 50px;
+    margin-top: 10px;
+    color: white;
+}
+  }

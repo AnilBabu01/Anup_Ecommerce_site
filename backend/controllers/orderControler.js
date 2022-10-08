@@ -94,6 +94,7 @@ exports.updateOrder = async (req, res, next) => {
   order.orderItems.forEach(async (item) => {
     await updateStock(item.product, item.quantity);
   });
+
   console.log("orderstate", req.body.orderStatus);
   (order.orderStatus = req.body.orderStatus), (order.deliveredAt = Date.now());
 

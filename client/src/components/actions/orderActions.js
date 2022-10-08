@@ -21,9 +21,18 @@ import {
   ORDER_DETAILS_FAIL,
   CLEAR_ERRORS,
 } from "../constants/orderConstants";
+axios.defaults.headers.get["Authorization"] = `Bearer ${localStorage.getItem(
+  "token"
+)}`;
 
+axios.defaults.headers.post["Authorization"] = `Bearer ${localStorage.getItem(
+  "token"
+)}`;
 export const createOrder = (order) => async (dispatch, getState) => {
   try {
+    axios.defaults.headers.post[
+      "Authorization"
+    ] = `Bearer ${localStorage.getItem("token")}`;
     dispatch({ type: CREATE_ORDER_REQUEST });
 
     const config = {
@@ -53,6 +62,10 @@ export const createOrder = (order) => async (dispatch, getState) => {
 // Get curretly logged in user orders
 export const myOrders = () => async (dispatch) => {
   try {
+    axios.defaults.headers.get[
+      "Authorization"
+    ] = `Bearer ${localStorage.getItem("token")}`;
+
     dispatch({ type: MY_ORDERS_REQUEST });
 
     const { data } = await axios.get(
@@ -74,6 +87,10 @@ export const myOrders = () => async (dispatch) => {
 // Get order details
 export const getOrderDetails = (id) => async (dispatch) => {
   try {
+    axios.defaults.headers.get[
+      "Authorization"
+    ] = `Bearer ${localStorage.getItem("token")}`;
+
     dispatch({ type: ORDER_DETAILS_REQUEST });
 
     const { data } = await axios.get(
@@ -95,6 +112,10 @@ export const getOrderDetails = (id) => async (dispatch) => {
 // Get all orders - ADMIN
 export const allOrders = () => async (dispatch) => {
   try {
+    axios.defaults.headers.get[
+      "Authorization"
+    ] = `Bearer ${localStorage.getItem("token")}`;
+
     dispatch({ type: ALL_ORDERS_REQUEST });
 
     const { data } = await axios.get(
@@ -116,6 +137,9 @@ export const allOrders = () => async (dispatch) => {
 // update order
 export const updateOrder = (id, orderData) => async (dispatch) => {
   try {
+    axios.defaults.headers.put[
+      "Authorization"
+    ] = `Bearer ${localStorage.getItem("token")}`;
     dispatch({ type: UPDATE_ORDER_REQUEST });
 
     const config = {
@@ -145,6 +169,9 @@ export const updateOrder = (id, orderData) => async (dispatch) => {
 // Delete order
 export const deleteOrder = (id) => async (dispatch) => {
   try {
+    axios.defaults.headers.delete[
+      "Authorization"
+    ] = `Bearer ${localStorage.getItem("token")}`;
     dispatch({ type: DELETE_ORDER_REQUEST });
 
     const { data } = await axios.delete(

@@ -1,5 +1,6 @@
 const express = require("express");
 const { body } = require("express-validator");
+const upload = require("../middlewares/upload");
 const { isAuthenticatedUser, authorizeRoles } = require("../middlewares/auth");
 const router = express.Router();
 
@@ -20,13 +21,8 @@ const {
 
 router.post(
   "/regster",
-  [
-    body("name", "Enter a valid name").isLength({ min: 3 }),
-    body("email", "Enter a valid email").isEmail(),
-    body("password", "Password must be atleast 5 characters").isLength({
-      min: 5,
-    }),
-  ],
+
+  upload.single("avatar"),
   registerUser
 );
 
@@ -46,7 +42,12 @@ router.get("/logout", logout);
 router.post("/password/forgot", forgotPassword);
 router.put("/password/reset/:token", resetPassword);
 router.put("/password/update", isAuthenticatedUser, updatePassword);
-router.put("/updateprofile", isAuthenticatedUser, updateProfile);
+router.put(
+  "/updateprofile",
+  upload.single("avatar"),
+  isAuthenticatedUser,
+  updateProfile
+);
 router.get("/me", isAuthenticatedUser, getUserProfile);
 router.get(
   "/admin/users",

@@ -28,10 +28,6 @@ const Signup = () => {
   );
 
   useEffect(() => {
-    if (isAuthenticated) {
-      navigate("/");
-    }
-
     if (error) {
       alert.error(error);
       dispatch(clearErrors());
@@ -41,32 +37,21 @@ const Signup = () => {
   const submitHandler = (e) => {
     e.preventDefault();
 
-    const formData = new FormData();
-    formData.set("name", name);
-    formData.set("email", email);
-    formData.set("password", password);
-    formData.set("avatar", avatar);
+    const formdata = new FormData();
+    formdata.append("avatar", avatar, avatar.name);
+    formdata.append("name", name);
+    formdata.append("email", email);
 
-    dispatch(register(formData));
+    formdata.append("password", password);
 
-    console.log("form data ", formData);
+    dispatch(register(formdata));
+    navigate("/login");
+    console.log("form data ", formdata);
   };
-
   const onChange = (e) => {
     if (e.target.name === "avatar") {
-      const reader = new FileReader();
-
-      reader.onload = () => {
-        if (reader.readyState === 2) {
-          setAvatarPreview(reader.result);
-          setAvatar(reader.result);
-
-          const original = Buffer.toString("ascii");
-          console.log(original);
-        }
-      };
-
-      reader.readAsDataURL(e.target.files[0]);
+      setAvatar(e.target.files[0]);
+      setAvatarPreview(URL.createObjectURL(e.target.files[0]));
     } else {
       setUser({ ...user, [e.target.name]: e.target.value });
     }

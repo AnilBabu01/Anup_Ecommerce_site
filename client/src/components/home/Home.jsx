@@ -13,10 +13,11 @@ import { useAlert } from "react-alert";
 import { getProducts, clearErrors } from "../actions/productActions";
 
 import { loadUser } from "../actions/authActions";
-
+import "./Home.css";
 const Home = ({ match }) => {
   const dispatch = useDispatch();
   const alert = useAlert();
+  const [onstinegetuserinfo, setonstinegetuserinfo] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [price, setPrice] = useState([1, 1000]);
   const [category, setCategory] = useState("");
@@ -42,9 +43,15 @@ const Home = ({ match }) => {
     (state) => state.products
   );
 
-  useEffect(() => {
-    dispatch(loadUser());
+  if (onstinegetuserinfo === true) {
+    const token = localStorage.getItem("token");
+    if (token) {
+      dispatch(loadUser());
+      setonstinegetuserinfo(false);
+    }
+  }
 
+  useEffect(() => {
     dispatch(getProducts(keyword, currentPage, price, category, rating));
     if (error) {
       return alert.error(error);
@@ -66,7 +73,11 @@ const Home = ({ match }) => {
       ) : (
         <>
           <Metadata title={"Buy best product by"} />
-          <h1 id="products_heading">Latest Products</h1>
+          <div>
+            <h1 className="latesttext " id="products_heading">
+              Latest Products
+            </h1>
+          </div>
 
           {keyword ? (
             <>

@@ -29,6 +29,8 @@ import ProcessOrder from "./components/admin/processorder/ProcessOrder";
 import UsersList from "./components/admin/userlist/UsersList";
 import UpdateUser from "./components/admin/updateuser/UpdateUser";
 import ProductReviews from "./components/admin/productreviews/ProductReviews";
+import { useDispatch, useSelector } from "react-redux";
+import { loadUser } from "./components/actions/authActions";
 import "./App.css";
 import { axios } from "axios";
 
@@ -36,8 +38,15 @@ const stripe = loadStripe(
   "pk_test_51LopskSGAjDSZQyBVlYz24jYhviKM94BLmSCmiimOAre20S8Ti9RD2CF8BPfAsofbNl1fdmQK2UxyFXSPvzS0Tmm00PM0lilLG"
 );
 function App() {
-  useEffect(() => {}, []);
-
+  const dispatch = useDispatch();
+  const [onstinegetuserinfo, setonstinegetuserinfo] = useState(true);
+  if (onstinegetuserinfo === true) {
+    const token = localStorage.getItem("token");
+    if (token) {
+      dispatch(loadUser());
+      setonstinegetuserinfo(false);
+    }
+  }
   return (
     <>
       <Elements stripe={stripe}>

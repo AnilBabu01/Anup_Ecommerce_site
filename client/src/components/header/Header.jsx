@@ -3,20 +3,25 @@ import { Link, Route, Routes } from "react-router-dom";
 import Search from "../search/Search";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../actions/authActions";
+import "./Header.css";
 const Header = ({ history }) => {
   const dispatch = useDispatch();
 
-  const { user, loading } = useSelector((state) => state.auth);
+  const { user, loading, isAuthenticated } = useSelector((state) => state.auth);
   const { cartItems } = useSelector((state) => state.cart);
   const logoutHandler = () => {
+    localStorage.removeItem("token");
     dispatch(logout());
   };
   return (
     <>
-      <nav style={{ possition: "fixed" }} class="navbar row">
+      <nav class="navbar  navbarwith row">
         <div class="col-12 col-md-3">
           <div class="navbar-brand">
-            <h2 style={{ color: "#fa9c23" }}>Ab-coder</h2>
+            <img
+              style={{ width: "200px", height: "50px" }}
+              src="./images/logo.png"
+            />
           </div>
         </div>
 
@@ -25,16 +30,27 @@ const Header = ({ history }) => {
         </div>
 
         <div class="col-12 col-md-3 mt-4 mt-md-0 text-center">
-          <Link to="/cart" state={{ textDeration: "none" }}>
+          {user && user.role === "user" && (
+            <Link to="/cart" state={{ textDeration: "none" }}>
+              <span id="cart" class="ml-3">
+                Cart
+              </span>
+              <span
+                class="ml-1"
+                id="cart_count"
+                style={{ marginRight: "20px" }}
+              >
+                {cartItems.length}
+              </span>
+            </Link>
+          )}
+          {user && user.role === "admin" && (
             <span id="cart" class="ml-3">
-              Cart
+              Admin
             </span>
-            <span class="ml-1" id="cart_count" style={{ marginRight: "20px" }}>
-              {cartItems.length}
-            </span>
-          </Link>
+          )}
 
-          {user ? (
+          {isAuthenticated ? (
             <div className="ml-4 dropdown d-inline">
               <Link
                 to="#"
@@ -47,7 +63,7 @@ const Header = ({ history }) => {
               >
                 <figure className="avatar avatar-nav">
                   <img
-                    src={user.avatar && user.avatar.url}
+                    src={user && user.avatar}
                     alt={user && user.name}
                     className="rounded-circle"
                   />

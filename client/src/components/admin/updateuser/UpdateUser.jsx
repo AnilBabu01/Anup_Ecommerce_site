@@ -56,12 +56,12 @@ const UpdateUser = () => {
   const submitHandler = (e) => {
     e.preventDefault();
 
-    const formData = new FormData();
-    formData.set("name", name);
-    formData.set("email", email);
-    formData.set("role", role);
-
-    dispatch(updateUser(user._id, formData));
+    const userdata = {
+      name: name,
+      email: email,
+      role: role,
+    };
+    dispatch(updateUser(user._id, userdata));
   };
 
   return (

@@ -23,7 +23,7 @@ const Profile = () => {
               <figure className="avatar avatar-profile">
                 <img
                   className="rounded-circle img-fluid"
-                  src={user.avatar.url}
+                  src={user.avatar}
                   alt={user.name}
                 />
               </figure>

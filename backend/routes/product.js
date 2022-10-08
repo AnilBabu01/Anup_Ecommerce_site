@@ -1,4 +1,5 @@
 const express = require("express");
+const upload = require("../middlewares/upload");
 const { isAuthenticatedUser, authorizeRoles } = require("../middlewares/auth");
 const router = express.Router();
 
@@ -18,13 +19,19 @@ const {
 
 router.post(
   "/admin/product/create",
+  upload.array("avatar"),
   isAuthenticatedUser,
   authorizeRoles("admin"),
   newProduct
 );
 router
   .route("/admin/product/updateProduct/:id")
-  .put(isAuthenticatedUser, authorizeRoles("admin"), updateProduct);
+  .put(
+    isAuthenticatedUser,
+    upload.array("avatar"),
+    authorizeRoles("admin"),
+    updateProduct
+  );
 router
   .route("/admin/product/:id")
   .put(isAuthenticatedUser, authorizeRoles("admin"), updateProduct)
@@ -43,6 +50,7 @@ router.route("/product/review").put(isAuthenticatedUser, createProductReview);
 
 router
   .route("/admin/product/reviews/:id")
-  .get(isAuthenticatedUser, getProductReviews)
-  .delete(isAuthenticatedUser, deleteReview);
+  .get(isAuthenticatedUser, getProductReviews);
+
+router.delete("/admin/productreview", isAuthenticatedUser, deleteReview);
 module.exports = router;

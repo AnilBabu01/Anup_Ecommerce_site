@@ -11,7 +11,7 @@ import {
   clearErrors,
 } from "../../actions/productActions";
 import { UPDATE_PRODUCT_RESET } from "../../constants/productConstants";
-
+const formData = new FormData();
 const UpdateProduct = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -86,7 +86,6 @@ const UpdateProduct = () => {
   const submitHandler = (e) => {
     e.preventDefault();
 
-    const formData = new FormData();
     formData.set("name", name);
     formData.set("price", price);
     formData.set("description", description);
@@ -94,32 +93,19 @@ const UpdateProduct = () => {
     formData.set("stock", stock);
     formData.set("seller", seller);
 
-    images.forEach((image) => {
-      formData.append("images", image);
-    });
-
     dispatch(updateProduct(product._id, formData));
   };
-
-  const onChange = (e) => {
-    const files = Array.from(e.target.files);
-
-    setImagesPreview([]);
-    setImages([]);
-    setOldImages([]);
-
-    files.forEach((file) => {
-      const reader = new FileReader();
-
-      reader.onload = () => {
-        if (reader.readyState === 2) {
-          setImagesPreview((oldArray) => [...oldArray, reader.result]);
-          setImages((oldArray) => [...oldArray, reader.result]);
-        }
-      };
-
-      reader.readAsDataURL(file);
-    });
+  const setfileinfoform = (filelist) => {
+    for (let [name, value] of formData) {
+      if (name === "avatar") {
+        formData.delete(name);
+      }
+    }
+    for (var i = 0; i < filelist.length; i++) {
+      const file = filelist[i];
+      formData.append("avatar", file);
+      console.log("file is ", file);
+    }
   };
 
   return (
@@ -219,7 +205,29 @@ const UpdateProduct = () => {
                       name="product_images"
                       className="custom-file-input"
                       id="customFile"
-                      onChange={onChange}
+                      onChange={(e) => {
+                        const files = Array.from(e.target.files);
+
+                        setImagesPreview([]);
+
+                        files.forEach((file) => {
+                          const reader = new FileReader();
+
+                          reader.onload = () => {
+                            if (reader.readyState === 2) {
+                              setImagesPreview((oldArray) => [
+                                ...oldArray,
+                                reader.result,
+                              ]);
+                            }
+                          };
+
+                          reader.readAsDataURL(file);
+                        });
+                        const filelist = e.target.files;
+                        console.log(filelist);
+                        setfileinfoform(filelist);
+                      }}
                       multiple
                     />
                     <label className="custom-file-label" htmlFor="customFile">
@@ -231,8 +239,8 @@ const UpdateProduct = () => {
                     oldImages.map((img) => (
                       <img
                         key={img}
-                        src={img.url}
-                        alt={img.url}
+                        src={img.Url}
+                        alt={img.Url}
                         className="mt-3 mr-2"
                         width="55"
                         height="52"

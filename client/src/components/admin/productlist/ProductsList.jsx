@@ -108,6 +108,10 @@ const ProductsList = () => {
   };
 
   const deleteProductHandler = async (id) => {
+    axios.defaults.headers.delete[
+      "Authorization"
+    ] = `Bearer ${localStorage.getItem("token")}`;
+
     const data = await axios.delete(
       `http://localhost:8080/api/admin/product/deleteProduct/${id}`
     );

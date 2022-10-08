@@ -7,7 +7,7 @@ const bodyparser = require("body-parser");
 var cors = require("cors");
 const app = express();
 
-app.use(expresfileupload());
+//app.use(expresfileupload());
 app.use(
   cors({
     origin: "http://localhost:3000",
@@ -15,7 +15,7 @@ app.use(
     optionsSuccessStatus: 200,
   })
 );
-
+app.use("/images", express.static("images"));
 app.use(express.json({ limit: "50mb" }));
 app.use(bodyparser.urlencoded({ extended: true }));
 app.use(cookiesParser());
@@ -30,7 +30,9 @@ app.use("/api/auth", user);
 app.use("/api", product);
 app.use("/api", order);
 app.use("/api", payment);
-
+app.get("/api", (req, res) => {
+  res.send("Api is working on Port ");
+});
 //middleware to handle errors
 app.use(errorMiddleware);
 module.exports = app;
