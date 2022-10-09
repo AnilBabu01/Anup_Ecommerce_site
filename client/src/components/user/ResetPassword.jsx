@@ -32,9 +32,8 @@ const ForgotPassword = () => {
     e.preventDefault();
 
     const formData = new FormData();
-    formData.set("email", email);
 
-    dispatch(forgotPassword(formData));
+    dispatch(forgotPassword(email));
   };
 
   return (
@@ -50,7 +49,7 @@ const ForgotPassword = () => {
         </>
       ) : (
         <>
-          <div className="row wrapper">
+          <div className="row wrapper loginMoble">
             <div className="col-10 col-lg-5">
               <form className="shadow-lg" onSubmit={submitHandler}>
                 <h1 className="mb-3">Forgot Password</h1>

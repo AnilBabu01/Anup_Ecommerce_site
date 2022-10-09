@@ -115,7 +115,7 @@ const ProductReviews = () => {
           <Sidebar />
         </div>
 
-        <div className="col-12 col-md-10">
+        <div style={{ marginTop: "4rem" }} className="  col-12 col-md-10">
           <Fragment>
             <div className="row justify-content-center mt-5">
               <div className="col-5">

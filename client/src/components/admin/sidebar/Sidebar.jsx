@@ -53,6 +53,11 @@ const Sidebar = () => {
               <i className="fa fa-star"></i> Reviews
             </Link>
           </li>
+          <li>
+            <Link to="/admin/slider">
+              <i className="fa fa-star"></i> Slider
+            </Link>
+          </li>
         </ul>
       </nav>
     </div>

@@ -1,0 +1,26 @@
+
+.moblecart{
+    margin-top: 7rem!important;
+    margin-left: 10px!important;
+}
+
+
+
+
+@media screen and (max-width: 780px) {
+
+    .moblecart{
+        margin-top: 13rem!important;
+        margin-left: 10px!important;
+    }
+
+    .formobile{
+        margin-top: 110px;
+    }
+
+    .mobileckeckim{
+        width: 30px!important;
+        height: 30px!important;
+    }
+   
+  }

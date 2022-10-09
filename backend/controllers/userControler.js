@@ -123,30 +123,29 @@ exports.logout = async (req, res, next) => {
 // forget password   api/auth/password/forgot
 
 exports.forgotPassword = async (req, res, next) => {
-  const user = await User.findOne({ email: req.body.email });
-
-  if (!user) {
-    return res.status(404).json({
-      success: false,
-      message: "User not found with this email",
-    });
-  }
-
-  // Get reset token
-  const resetToken = user.getResetPasswordToken();
-
-  await user.save({ validateBeforeSave: false });
-  //for production model
-  // const resetUrl = `${req.protocol}://${req.get(
-  //   "host"
-  // )}/api/auth/password/reset/${resetToken}`;
-
-  ///for check email service in local mode
-  const resetUrl = `${process.env.FRONTEND_URL}/password/reset/${resetToken}`;
-
-  const message = `Your password reset token is as follow:\n\n${resetUrl}\n\nIf you have not requested this email, then ignore it.`;
-
   try {
+    const user = await User.findOne({ email: req.body.email });
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found with this email",
+      });
+    }
+
+    // Get reset token
+    const resetToken = user.getResetPasswordToken();
+
+    await user.save({ validateBeforeSave: false });
+    //for production model
+    // const resetUrl = `${req.protocol}://${req.get(
+    //   "host"
+    // )}/api/auth/password/reset/${resetToken}`;
+
+    ///for check email service in local mode
+    const resetUrl = `${process.env.FRONTEND_URL}/password/reset/${resetToken}`;
+
+    const message = `Your password reset token is as follow:\n\n${resetUrl}\n\nIf you have not requested this email, then ignore it.`;
     await sendEmail({
       email: user.email,
       subject: "Password Recovery email",
@@ -172,40 +171,45 @@ exports.forgotPassword = async (req, res, next) => {
 
 // forget password   api/auth/password/reset/:token
 exports.resetPassword = async (req, res, next) => {
-  // Hash URL token
-  const resetPasswordToken = crypto
-    .createHash("sha256")
-    .update(req.params.token)
-    .digest("hex");
+  try {
+    // Hash URL token
+    console.log(req.body);
+    const resetPasswordToken = crypto
+      .createHash("sha256")
+      .update(req.params.token)
+      .digest("hex");
 
-  //if user reset password token is not expire then user will be select from db
-  const user = await User.findOne({
-    resetPasswordToken,
-    resetPasswordExpire: { $gt: Date.now() },
-  });
-
-  if (!user) {
-    return res.status(400).json({
-      success: false,
-      message: "Password reset token is invalid or has been expired",
+    //if user reset password token is not expire then user will be select from db
+    const user = await User.findOne({
+      resetPasswordToken,
+      resetPasswordExpire: { $gt: Date.now() },
     });
+
+    if (!user) {
+      return res.status(400).json({
+        success: false,
+        message: "Password reset token is invalid or has been expired",
+      });
+    }
+
+    if (req.body.password !== req.body.confirmPassword) {
+      return res.status(400).json({
+        success: false,
+        message: "Password does not match",
+      });
+    }
+
+    // Setup new password
+    user.password = req.body.password;
+
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpire = undefined;
+
+    await user.save();
+    sendToken(user, 200, res);
+  } catch (error) {
+    console.log(error);
   }
-
-  if (req.body.password !== req.body.confirmPassword) {
-    return res.status(400).json({
-      success: false,
-      message: "Password does not match",
-    });
-  }
-
-  // Setup new password
-  user.password = req.body.password;
-
-  user.resetPasswordToken = undefined;
-  user.resetPasswordExpire = undefined;
-
-  await user.save();
-  sendToken(user, 200, res);
 };
 
 // get currently user logged in details   api/auth/me

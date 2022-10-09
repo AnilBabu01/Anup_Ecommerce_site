@@ -1,0 +1,40 @@
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 3rem;
+}
+th,
+td {
+
+  padding: 15px;
+}
+
+.shippingmobile{
+  margin-top: 3rem;
+}
+@media screen and (max-width: 780px) {
+  .mobileview {
+    width: 300px !important;
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 9px;
+    margin-top: 3rem;
+  }
+  th,
+  td {
+    
+    padding: 1px;
+  }
+
+  .mobleeye{
+    width: 10px;
+    height: 10px;
+  }
+
+  .shippingmobile{
+    margin-top: 10rem;
+  }
+}

@@ -117,7 +117,7 @@ const OrdersList = ({ history }) => {
 
         <div className="col-12 col-md-10">
           <Fragment>
-            <h1 className="my-5">All Orders</h1>
+            <h1 className="my-5 latesttext1 ">All Orders</h1>
 
             {loading ? (
               <Loader />

@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Metadata from "../metadata/Metadata";
 import Loader from "../loader/Loader";
+import "./User.css";
 const Profile = () => {
   const usevigate = useNavigate();
   const { isAuthenticated, loading, user } = useSelector((state) => state.auth);
@@ -17,7 +18,9 @@ const Profile = () => {
       ) : (
         <>
           <Metadata title={"Profile"} />
-          <h2 className="mt-5 ml-5">My Profile</h2>
+          <h2 className="mt-5 ml-5" style={{ marginTop: "8rem" }}>
+            My Profile
+          </h2>
           <div className="row justify-content-around mt-5 user-info">
             <div className="col-12 col-md-3">
               <figure className="avatar avatar-profile">

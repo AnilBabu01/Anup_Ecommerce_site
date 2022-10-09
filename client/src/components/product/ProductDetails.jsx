@@ -123,8 +123,11 @@ const ProductDetails = () => {
         <Loader />
       ) : (
         <>
-          <div className="row f-flex justify-content-around">
-            <div className="col-12 col-lg-5 img-fluid" id="product_image">
+          <div className="row f-flex justify-content-around latesttextprodel ">
+            <div
+              className="col-12 col-lg-5 img-fluid productImg"
+              id="product_image"
+            >
               <Carousel pause="hover">
                 {product.images &&
                   product.images.map((image) => (
@@ -139,7 +142,10 @@ const ProductDetails = () => {
               </Carousel>
             </div>
 
-            <div className="col-12 col-lg-5 mt-5">
+            <div
+              style={{ marginRight: "2rem" }}
+              className="col-12 col-lg-5 mt-5"
+            >
               <h3>{product.name}</h3>
               <p id="product_id">Product # {product._id}</p>
 
@@ -155,7 +161,7 @@ const ProductDetails = () => {
 
               <hr />
 
-              <p id="product_price">${product.price}</p>
+              <p id="product_price">₹{product.price}</p>
               <div className="stockCounter d-inline">
                 <span className="btn btn-danger minus" onClick={decreaseQty}>
                   -
@@ -222,6 +228,7 @@ const ProductDetails = () => {
               <div className="row mt-2 mb-5">
                 <div className="rating w-50">
                   <div
+                    style={{ marginTop: "10%" }}
                     className="modal fade"
                     id="ratingModal"
                     tabIndex="-1"

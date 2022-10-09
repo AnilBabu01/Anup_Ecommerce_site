@@ -3,6 +3,7 @@ import { Link, Route, Routes } from "react-router-dom";
 import Search from "../search/Search";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../actions/authActions";
+import logo from "../Images/logo.png";
 import "./Header.css";
 const Header = ({ history }) => {
   const dispatch = useDispatch();
@@ -20,7 +21,8 @@ const Header = ({ history }) => {
           <div class="navbar-brand">
             <img
               style={{ width: "200px", height: "50px" }}
-              src="./images/logo.png"
+              src={logo}
+              alt="logo"
             />
           </div>
         </div>
@@ -31,7 +33,7 @@ const Header = ({ history }) => {
 
         <div class="col-12 col-md-3 mt-4 mt-md-0 text-center">
           {user && user.role === "user" && (
-            <Link to="/cart" state={{ textDeration: "none" }}>
+            <Link to="/cart" state={{ textDecoration: "none" }}>
               <span id="cart" class="ml-3">
                 Cart
               </span>

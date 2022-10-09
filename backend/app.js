@@ -26,10 +26,12 @@ const product = require("./routes/product");
 const user = require("./routes/auth");
 const order = require("./routes/order");
 const payment = require("./routes/payment");
+const slider = require("./routes/slider");
 app.use("/api/auth", user);
 app.use("/api", product);
 app.use("/api", order);
 app.use("/api", payment);
+app.use("/api", slider);
 app.get("/api", (req, res) => {
   res.send("Api is working on Port ");
 });

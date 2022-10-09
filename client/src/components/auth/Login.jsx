@@ -6,7 +6,7 @@ import Loader from "../loader/Loader";
 import { useAlert } from "react-alert";
 import Metadata from "../metadata/Metadata";
 import { login, clearErrors } from "../actions/authActions";
-
+import "./Auth.css";
 const Login = ({ location }) => {
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
@@ -42,7 +42,7 @@ const Login = ({ location }) => {
         <>
           <Metadata title={"Login"} />
 
-          <div className="row wrapper">
+          <div className="row wrapper loginMoble">
             <div className="col-10 col-lg-5">
               <form className="shadow-lg" onSubmit={submit}>
                 <h1 className="mb-3">Login</h1>

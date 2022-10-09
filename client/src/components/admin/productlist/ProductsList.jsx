@@ -79,9 +79,9 @@ const ProductsList = () => {
       rows: [],
     };
 
-    products.forEach((product) => {
+    products.forEach((product, index) => {
       data.rows.push({
-        id: product._id,
+        id: index + 1,
         name: product.name,
         price: `$${product.price}`,
         stock: product.stock,
@@ -133,18 +133,19 @@ const ProductsList = () => {
 
         <div className="col-12 col-md-10">
           <Fragment>
-            <h1 className="my-5">All Products</h1>
-
             {loading ? (
               <Loader />
             ) : (
-              <MDBDataTable
-                data={setProducts()}
-                className="px-3"
-                bordered
-                striped
-                hover
-              />
+              <>
+                <h1 className="latesttext1  my-5">All Products</h1>
+                <MDBDataTable
+                  data={setProducts()}
+                  className="px-3"
+                  bordered
+                  striped
+                  hover
+                />
+              </>
             )}
           </Fragment>
         </div>

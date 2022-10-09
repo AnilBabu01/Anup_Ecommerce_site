@@ -29,6 +29,7 @@ import ProcessOrder from "./components/admin/processorder/ProcessOrder";
 import UsersList from "./components/admin/userlist/UsersList";
 import UpdateUser from "./components/admin/updateuser/UpdateUser";
 import ProductReviews from "./components/admin/productreviews/ProductReviews";
+import Slider from "./components/admin/slider/Slider";
 import { useDispatch, useSelector } from "react-redux";
 import { loadUser } from "./components/actions/authActions";
 import "./App.css";
@@ -80,6 +81,7 @@ function App() {
               <Route path="/admin/users" element={<UsersList />} />
               <Route path="/admin/user/:id" element={<UpdateUser />} />
               <Route path="/admin/reviews" element={<ProductReviews />} />
+              <Route path="/admin/slider" element={<Slider />} />
             </Routes>
           </div>
           <Footer />

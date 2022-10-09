@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 
 import Metadata from "../metadata/Metadata";
@@ -11,7 +10,7 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useAlert } from "react-alert";
 import { getProducts, clearErrors } from "../actions/productActions";
-
+import Slideruse from "../slider/Silderuse";
 import { loadUser } from "../actions/authActions";
 import "./Home.css";
 const Home = ({ match }) => {
@@ -22,6 +21,7 @@ const Home = ({ match }) => {
   const [price, setPrice] = useState([1, 1000]);
   const [category, setCategory] = useState("");
   const [rating, setRating] = useState(0);
+  const [imagess, setimagess] = useState("");
   const { keyword } = useParams();
 
   const categories = [
@@ -51,12 +51,29 @@ const Home = ({ match }) => {
     }
   }
 
+  const getsilderimg = async () => {
+    axios.defaults.headers.post[
+      "Authorization"
+    ] = `Bearer ${localStorage.getItem("token")}`;
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    const data = await axios.get(
+      `${process.env.REACT_APP_URL}/api/admin/getslider`,
+
+      config
+    );
+
+    console.log("img data from home", data.data.images);
+
+    setimagess(data.data.images);
+  };
   useEffect(() => {
+    getsilderimg();
     dispatch(getProducts(keyword, currentPage, price, category, rating));
-    if (error) {
-      return alert.error(error);
-      dispatch(clearErrors);
-    }
   }, [dispatch, error, alert, currentPage, keyword, price, category, rating]);
 
   const setCurrentPageNo = (pageNumber) => {
@@ -73,6 +90,7 @@ const Home = ({ match }) => {
       ) : (
         <>
           <Metadata title={"Buy best product by"} />
+          <Slideruse image={imagess} />
           <div>
             <h1 className="latesttext " id="products_heading">
               Latest Products

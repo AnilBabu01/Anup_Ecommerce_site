@@ -1,0 +1,10 @@
+.profilemobile{
+    margin-top: 6rem!important;
+}
+
+@media screen and (max-width:780px)
+{
+    .profilemobile{
+        margin-top: 12.5rem!important;
+    }
+}

@@ -1,10 +1,9 @@
 const mongoose = require("mongoose");
 
-const url =
-  "mongodb+srv://anil:Cjd2YNDMQQvj5vbd@cluster0.bxsur.mongodb.net/ecommerce?retryWrites=true&w=majority";
+const url = "";
 const connectDatabase = () => {
   mongoose
-    .connect(url, {
+    .connect("mongodb://0.0.0.0:27017/ecommerse", {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     })

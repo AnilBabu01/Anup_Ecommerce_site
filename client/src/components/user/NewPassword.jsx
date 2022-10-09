@@ -32,11 +32,11 @@ const NewPassword = () => {
   const submitHandler = (e) => {
     e.preventDefault();
 
-    const formData = new FormData();
-    formData.set("password", password);
-    formData.set("confirmPassword", confirmPassword);
-
-    dispatch(resetPassword(token, formData));
+    const resetdata = {
+      confirmPassword: confirmPassword,
+      password: password,
+    };
+    dispatch(resetPassword(token, resetdata));
   };
 
   return (

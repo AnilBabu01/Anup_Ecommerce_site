@@ -1,12 +1,11 @@
 import React, { Fragment } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
 import MetaData from "../metadata/Metadata";
-
 import { useAlert } from "react-alert";
 import { useDispatch, useSelector } from "react-redux";
 import { addItemToCart, removeItemFromCart } from "../actions/cartActions";
 import ShppingInfo from "./ShippingInfo";
+import "./Cart.css";
 const Cart = () => {
   const navigate = useNavigate();
 
@@ -46,10 +45,10 @@ const Cart = () => {
     <>
       <MetaData title={"Your Cart"} />
       {cartItems.length === 0 ? (
-        <h2 className="mt-5">Your Cart is Empty</h2>
+        <h2 className="mt-5 moblecart">Your Cart is Empty</h2>
       ) : (
         <>
-          <h2 className="mt-5">
+          <h2 className="mt-5 moblecart">
             Your Cart: <b>{cartItems.length} items</b>
           </h2>
 
@@ -78,7 +77,7 @@ const Cart = () => {
                         </div>
 
                         <div className="col-4 col-lg-2 mt-4 mt-lg-0">
-                          <p id="card_item_price">${item.price}</p>
+                          <p id="card_item_price">₹{item.price}</p>
                         </div>
 
                         <div className="col-4 col-lg-3 mt-4 mt-lg-0">
@@ -145,7 +144,7 @@ const Cart = () => {
                 <p>
                   Est. total:{" "}
                   <span className="order-summary-values">
-                    $
+                    ₹
                     {cartItems
                       .reduce(
                         (acc, item) => acc + item.quantity * item.price,

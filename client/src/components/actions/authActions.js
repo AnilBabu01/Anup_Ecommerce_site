@@ -231,7 +231,9 @@ export const forgotPassword = (email) => async (dispatch) => {
 
     const { data } = await axios.post(
       `${process.env.REACT_APP_URL}/api/auth/password/forgot`,
-      email,
+      {
+        email: email,
+      },
       config
     );
 

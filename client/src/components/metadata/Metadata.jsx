@@ -1,10 +1,10 @@
-import { Helmet } from 'react-helmet';
+import { Helmet } from "react-helmet";
 
-function Metadata({title}) {
+function Metadata({ title }) {
   return (
     <>
       <Helmet>
-        <title>{`${title}-Ab-Ecommerce`}</title>
+        <title>{`${title}-Neplify-kart`}</title>
         <meta name="description" content="App Description" />
         <meta name="theme-color" content="#008f68" />
       </Helmet>

@@ -54,9 +54,9 @@ const OrderDetails = () => {
         <Fragment>
           <div className="row d-flex justify-content-between">
             <div className="col-12 col-lg-8 mt-5 order-details">
-              <h1 className="my-5">Order # {order._id}</h1>
-
-              <h4 className="mb-4">Shipping Info</h4>
+              <h4 className="mb-4 shippingmobile" style={{ marginLeft: "5px" }}>
+                Shipping Info
+              </h4>
               <p>
                 <b>Name:</b> {user && user.name}
               </p>
@@ -68,17 +68,21 @@ const OrderDetails = () => {
                 {shippingDetails}
               </p>
               <p>
-                <b>Amount:</b> ${totalPrice}
+                <b>Amount:</b> ₹{totalPrice}
               </p>
 
               <hr />
 
-              <h4 className="my-4">Payment</h4>
+              <h4 style={{ marginLeft: "5px" }} className="my-4">
+                Payment
+              </h4>
               <p className={isPaid ? "greenColor" : "redColor"}>
                 <b>{isPaid ? "PAID" : "NOT PAID"}</b>
               </p>
 
-              <h4 className="my-4">Order Status:</h4>
+              <h4 style={{ marginLeft: "5px" }} className="my-4">
+                Order Status:
+              </h4>
               <p
                 className={
                   order.orderStatus &&
@@ -90,7 +94,9 @@ const OrderDetails = () => {
                 <b>{orderStatus}</b>
               </p>
 
-              <h4 className="my-4">Order Items:</h4>
+              <h4 style={{ marginLeft: "5px" }} className="my-4">
+                Order Items:
+              </h4>
 
               <hr />
               <div className="cart-item my-1">
@@ -113,7 +119,7 @@ const OrderDetails = () => {
                       </div>
 
                       <div className="col-4 col-lg-2 mt-4 mt-lg-0">
-                        <p>${item.price}</p>
+                        <p>₹{item.price}</p>
                       </div>
 
                       <div className="col-4 col-lg-3 mt-4 mt-lg-0">

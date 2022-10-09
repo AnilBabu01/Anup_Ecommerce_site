@@ -69,9 +69,9 @@ const UsersList = ({ history }) => {
       rows: [],
     };
 
-    users.forEach((user) => {
+    users.forEach((user, index) => {
       data.rows.push({
-        id: user._id,
+        id: index + 1,
         name: user.name,
         email: user.email,
         role: user.role,
@@ -108,7 +108,7 @@ const UsersList = ({ history }) => {
 
         <div className="col-12 col-md-10">
           <Fragment>
-            <h1 className="my-5">All Users</h1>
+            <h1 className="my-5 latesttext1 ">All Users</h1>
 
             {loading ? (
               <Loader />

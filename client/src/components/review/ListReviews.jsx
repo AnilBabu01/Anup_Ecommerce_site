@@ -2,7 +2,10 @@ import React from "react";
 
 const ListReviews = ({ reviews }) => {
   return (
-    <div class="reviews w-75">
+    <div
+      class="reviews"
+      style={{ marginTop: "-12rem", paddingLeft: "5px", paddingRight: "5px" }}
+    >
       <h3>Other's Reviews:</h3>
       <hr />
       {reviews &&

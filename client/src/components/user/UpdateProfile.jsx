@@ -60,7 +60,7 @@ const UpdateProfile = () => {
     <Fragment>
       <MetaData title={"Update Profile"} />
 
-      <div className="row wrapper">
+      <div className="row wrapper profilemobile">
         <div className="col-10 col-lg-5">
           <form
             className="shadow-lg"

@@ -65,7 +65,7 @@ const Signup = () => {
         <>
           <Metadata title={"Register"} />
 
-          <div className="row wrapper">
+          <div className="row wrapper loginMoble">
             <div className="col-10 col-lg-5">
               <form
                 onSubmit={submitHandler}
