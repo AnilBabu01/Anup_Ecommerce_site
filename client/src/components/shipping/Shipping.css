@@ -1,0 +1,24 @@
+.mainshipping{
+    margin-top: 6rem!important;
+}
+
+.centershipping{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.inputshipng{
+    border: 1px solid gray;
+    border-radius: 3px;
+    padding-left: 8px;
+}
+
+.inputshipng:focus{
+    outline: none;
+}
+.inputgdiv{
+    display: flex;
+    flex-direction: column;
+}
+

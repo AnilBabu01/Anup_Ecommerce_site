@@ -14,22 +14,20 @@ exports.registerUser = async (req, res, next) => {
 
     let user = await User.findOne({ email: req.body.email });
     if (user) {
-      res
-        .status(404)
-        .json({ status: false, msg: "user allready exixit with mail" });
+      return res
+        .status(400)
+        .json({ success: "Sorry a user with this email already exists" });
     }
 
     if (!errors.isEmpty()) {
       return res.status(400).json({ success: errors.array() });
     }
-    const { name, email, password, avatar } = req.body;
+    const { name, email, password } = req.body;
 
-    const url = req.protocol + "://" + req.get("host");
     user = await User.create({
       name,
       email,
       password,
-      avatar: url + "/images/" + req.file.filename,
     });
 
     const data = {
@@ -48,17 +46,10 @@ exports.registerUser = async (req, res, next) => {
 exports.updateProfile = async (req, res, next) => {
   try {
     let delimage = await User.findOne({ email: req.body.email });
-    if (delimage) {
-      var str = delimage.avatar.substring(22);
-      fs.unlinkSync(str);
-      console.log("successfully deleted /tmp/hello", str);
-    }
 
-    const url = req.protocol + "://" + req.get("host");
     const newUserData = {
       name: req.body.name,
       email: req.body.email,
-      avatar: url + "/images/" + req.file.filename,
     };
     const user = await User.findByIdAndUpdate(req.user.id, newUserData, {
       new: true,
@@ -82,8 +73,9 @@ exports.loginUser = async (req, res, next) => {
       return res.status(400).json({ success: errors.array() });
     }
     const { email, password } = req.body;
+    console.log(email, password);
     // Finding user in database
-    const user = await User.findOne({ email }).select("+password");
+    const user = await User.findOne({ email });
 
     if (!user) {
       return res.status(401).json({ msg: "Invalid email or password" });
@@ -143,7 +135,7 @@ exports.forgotPassword = async (req, res, next) => {
     // )}/api/auth/password/reset/${resetToken}`;
 
     ///for check email service in local mode
-    const resetUrl = `${process.env.FRONTEND_URL}/password/reset/${resetToken}`;
+    const resetUrl = `https://www.nepalifykart.com/password/reset/${resetToken}`;
 
     const message = `Your password reset token is as follow:\n\n${resetUrl}\n\nIf you have not requested this email, then ignore it.`;
     await sendEmail({

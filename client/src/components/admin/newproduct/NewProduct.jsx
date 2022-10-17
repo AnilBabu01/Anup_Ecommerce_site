@@ -16,22 +16,18 @@ const NewProduct = () => {
   const [category, setCategory] = useState("");
   const [stock, setStock] = useState(0);
   const [seller, setSeller] = useState("");
-  const [images, setImages] = useState([]);
   const [imagesPreview, setImagesPreview] = useState([]);
-
+  const [imgcheck, setimgcheck] = useState(false);
   const categories = [
-    "Electronics",
-    "Cameras",
-    "Laptops",
+    "Select Categories",
+    "Women",
+    "Men",
+    "Kids",
+    "Beauty",
+    "Electronic Device",
+    "Mobile",
     "Accessories",
-    "Headphones",
-    "Food",
-    "Books",
-    "Clothes/Shoes",
-    "Beauty/Health",
-    "Sports",
-    "Outdoor",
-    "Home",
+    "Jewellery",
   ];
 
   const alert = useAlert();
@@ -68,6 +64,7 @@ const NewProduct = () => {
   };
 
   const setfileinfoform = (filelist) => {
+    setimgcheck(true);
     for (let [name, value] of formData) {
       if (name === "avatar") {
         formData.delete(name);
@@ -85,7 +82,7 @@ const NewProduct = () => {
     <Fragment>
       <MetaData title={"New Product"} />
       <div className="row">
-        <div className="col-12 col-md-2">
+        <div className="col-12 col-md-2" style={{ marginTop: "4.8rem" }}>
           <Sidebar />
         </div>
 
@@ -220,6 +217,17 @@ const NewProduct = () => {
                   id="login_button"
                   type="submit"
                   className="btn btn-block py-3"
+                  disabled={
+                    name &&
+                    price &&
+                    description &&
+                    categories &&
+                    stock &&
+                    seller &&
+                    imgcheck
+                      ? false
+                      : true
+                  }
                 >
                   CREATE
                 </button>

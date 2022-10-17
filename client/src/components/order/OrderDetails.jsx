@@ -52,7 +52,10 @@ const OrderDetails = () => {
         <Loader />
       ) : (
         <Fragment>
-          <div className="row d-flex justify-content-between">
+          <div
+            className="row d-flex justify-content-between"
+            style={{ marginTop: "20rem" }}
+          >
             <div className="col-12 col-lg-8 mt-5 order-details">
               <h4 className="mb-4 shippingmobile" style={{ marginLeft: "5px" }}>
                 Shipping Info

@@ -32,8 +32,12 @@ const ProductDetails = () => {
   );
   console.log(cartItems);
   const addToCart = () => {
-    dispatch(addItemToCart(id, quantity));
-    alert.success("Item Added to Cart");
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      dispatch(addItemToCart(id, quantity));
+      alert.success("Item Added to Cart");
+    }
   };
 
   const increaseQty = () => {
@@ -178,15 +182,21 @@ const ProductDetails = () => {
                   +
                 </span>
               </div>
-              <button
-                type="button"
-                id="cart_btn"
-                className="btn btn-primary d-inline ml-4"
-                disabled={product.stock === 0}
-                onClick={addToCart}
-              >
-                Add to Cart
-              </button>
+              {user ? (
+                <button
+                  type="button"
+                  id="cart_btn"
+                  className="btn btn-primary d-inline ml-4"
+                  disabled={product.stock === 0}
+                  onClick={addToCart}
+                >
+                  Add to Cart
+                </button>
+              ) : (
+                <div className="alert alert-danger mt-5" type="alert">
+                  Login Require to add to cart
+                </div>
+              )}
 
               <hr />
 

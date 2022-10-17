@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAlert } from "react-alert";
 import { register, clearErrors } from "../actions/authActions";
 import Loader from "../loader/Loader";
-
+import axios from "axios";
 const Signup = () => {
   const dispatch = useDispatch();
   const alert = useAlert();
@@ -34,27 +34,41 @@ const Signup = () => {
     }
   }, [dispatch, alert, isAuthenticated, error]);
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
 
     const formdata = new FormData();
-    formdata.append("avatar", avatar, avatar.name);
+
     formdata.append("name", name);
     formdata.append("email", email);
 
     formdata.append("password", password);
+    if (email && name && password) {
+      const config = {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      };
 
-    dispatch(register(formdata));
-    navigate("/login");
-    console.log("form data ", formdata);
+      const res = await axios.post(
+        `${process.env.REACT_APP_URL}/api/auth/regster`,
+        { name: name, email: email, password: password }
+      );
+
+      if (res) {
+        dispatch(register(formdata));
+        navigate("/login");
+        console.log("form data ", formdata);
+        alert.success("You have Registerwd Successfully");
+      } else {
+        alert.success("You have Registerwd Successfully");
+      }
+
+      console.log(res);
+    }
   };
   const onChange = (e) => {
-    if (e.target.name === "avatar") {
-      setAvatar(e.target.files[0]);
-      setAvatarPreview(URL.createObjectURL(e.target.files[0]));
-    } else {
-      setUser({ ...user, [e.target.name]: e.target.value });
-    }
+    setUser({ ...user, [e.target.name]: e.target.value });
   };
 
   return (
@@ -110,39 +124,11 @@ const Signup = () => {
                   />
                 </div>
 
-                <div className="form-group">
-                  <label htmlfor="avatar_upload">Avatar</label>
-                  <div className="d-flex align-items-center">
-                    <div>
-                      <figure className="avatar mr-3 item-rtl">
-                        <img
-                          src={avatarPreview}
-                          className="rounded-circle"
-                          alt="imag"
-                        />
-                      </figure>
-                    </div>
-                    <div className="custom-file">
-                      <input
-                        type="file"
-                        name="avatar"
-                        className="custom-file-input"
-                        id="customFile"
-                        accept="images/*"
-                        onChange={onChange}
-                      />
-                      <label className="custom-file-label" htmlFor="customFile">
-                        Choose Avatar
-                      </label>
-                    </div>
-                  </div>
-                </div>
-
                 <button
                   id="register_button"
                   type="submit"
                   className="btn btn-block py-3"
-                  disabled={loading ? true : false}
+                  disabled={email && password && email ? false : true}
                 >
                   REGISTER
                 </button>

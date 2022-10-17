@@ -26,7 +26,7 @@ const Dashboard = () => {
 
   return (
     <Fragment>
-      <div className="row">
+      <div className="row" style={{ marginTop: "4.5rem" }}>
         <div className="col-12 col-md-2">
           <Sidebar />
         </div>

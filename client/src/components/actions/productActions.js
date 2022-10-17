@@ -53,7 +53,7 @@ export const getProducts =
 
       let link = `${process.env.REACT_APP_URL}/api/product/getAllProduct?keyword=${keyword}&page=${currentPage}&price[lte]=${price[1]}&price[gte]=${price[0]}&ratings[gte]=${rating}`;
       if (category) {
-        link = `${process.env.REACT_APP_URL}/api/product/getAllProduct?keyword=${keyword}&page=${currentPage}&price[lte]=${price[1]}&price[gte]=${price[0]}&category=${category}&ratings[gte]=${rating}`;
+        link = `${process.env.REACT_APP_URL}/api/product/getAllProduct?category=${category}`;
       }
       const { data } = await axios.get(link);
 

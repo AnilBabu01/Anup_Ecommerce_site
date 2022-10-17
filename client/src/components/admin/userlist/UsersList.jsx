@@ -101,7 +101,7 @@ const UsersList = ({ history }) => {
   return (
     <Fragment>
       <MetaData title={"All Users"} />
-      <div className="row">
+      <div className="row" style={{ marginTop: "5rem" }}>
         <div className="col-12 col-md-2">
           <Sidebar />
         </div>

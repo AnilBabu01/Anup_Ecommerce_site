@@ -1,25 +1,23 @@
-import React, {useState} from "react";
-import {useNavigate} from 'react-router-dom';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 const Search = () => {
   const navigate = useNavigate();
   const [keyword, setKeyword] = useState("");
   const searchHandler = (e) => {
-    e.preventDefault();
-     
     if (keyword.trim()) {
-      navigate(`/search/${keyword}`)
-  } else {
-    navigate('/')
-  }
+      navigate(`/search/${keyword}`);
+    } else {
+      navigate("/");
+    }
   };
   return (
     <>
-      <form onSubmit={searchHandler}>
+      <form onSubmit={searchHandler} className="mobileswrchview">
         <div className="input-group">
           <input
             type="text"
             id="search_field"
-            className="form-control"
+            className="form-control inmobile"
             placeholder="Enter Product Name ..."
             onChange={(e) => setKeyword(e.target.value)}
           />

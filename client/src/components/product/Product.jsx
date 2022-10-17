@@ -3,9 +3,16 @@ import { Link } from "react-router-dom";
 const Product = ({ product }) => {
   return (
     <>
-      <div className="col-sm-12 col-md-6 col-lg-3 ">
+      <div
+        className="col-sm-12 col-md-6 col-lg-2"
+        style={{ marginBottom: "1rem" }}
+      >
         <div className="card p-2 rounded">
-          <img alt="img" className="proimg" src={product.images[0].Url} />
+          <img
+            alt="img"
+            className="proimg"
+            src={product.images[0].Url ? product.images[0].Url : ""}
+          />
 
           <div className="card-body d-flex flex-column">
             <h5 className="card-title">
@@ -20,7 +27,7 @@ const Product = ({ product }) => {
               </div>
               <span id="no_of_reviews">({product.numOfReviews} Reviews)</span>
             </div>
-            <p className="card-text">{product.price}</p>
+            <p className="card-text">₹{product.price}</p>
             <Link
               to={`/product/${product._id}`}
               id="view_btn"

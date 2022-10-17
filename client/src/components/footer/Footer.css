@@ -35,6 +35,16 @@
     margin-top: 10px;
     color: white;
 }
+
+.mardivcontentlink{
+    display: flex;
+    flex-direction: column;
+    color:  #B4ABAB;
+}
+
+.mardivcontentlink a:hover{
+    color: #fa9c23;
+}
 .iconmain{
     width: 60px;
     height: 60px;

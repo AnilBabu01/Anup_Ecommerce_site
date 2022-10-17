@@ -21,24 +21,17 @@ const UpdateProduct = () => {
   const [category, setCategory] = useState("");
   const [stock, setStock] = useState(0);
   const [seller, setSeller] = useState("");
-  const [images, setImages] = useState([]);
-
+  const [imgcheck, setimgcheck] = useState(false);
   const [oldImages, setOldImages] = useState([]);
   const [imagesPreview, setImagesPreview] = useState([]);
 
   const categories = [
-    "Electronics",
-    "Cameras",
-    "Laptops",
+    "Select Categories",
+    "Electronic Device",
+    "Mobile",
     "Accessories",
-    "Headphones",
-    "Food",
-    "Books",
-    "Clothes/Shoes",
-    "Beauty/Health",
-    "Sports",
-    "Outdoor",
-    "Home",
+    "Clothing",
+    "Jewellery",
   ];
 
   const alert = useAlert();
@@ -96,6 +89,7 @@ const UpdateProduct = () => {
     dispatch(updateProduct(product._id, formData));
   };
   const setfileinfoform = (filelist) => {
+    setimgcheck(true);
     for (let [name, value] of formData) {
       if (name === "avatar") {
         formData.delete(name);
@@ -112,7 +106,7 @@ const UpdateProduct = () => {
     <Fragment>
       <MetaData title={"Update Product"} />
       <div className="row">
-        <div className="col-12 col-md-2">
+        <div className="col-12 col-md-2" style={{ marginTop: "4.8rem" }}>
           <Sidebar />
         </div>
 
@@ -227,6 +221,14 @@ const UpdateProduct = () => {
                         const filelist = e.target.files;
                         console.log(filelist);
                         setfileinfoform(filelist);
+
+                        if (!filelist) {
+                          for (var i = 0; i < oldImages.length; i++) {
+                            const img = oldImages[i];
+                            formData.append("avatar", img);
+                            console.log("file is ", img);
+                          }
+                        }
                       }}
                       multiple
                     />
@@ -263,7 +265,17 @@ const UpdateProduct = () => {
                   id="login_button"
                   type="submit"
                   className="btn btn-block py-3"
-                  disabled={loading ? true : false}
+                  disabled={
+                    name &&
+                    price &&
+                    description &&
+                    categories &&
+                    stock &&
+                    imgcheck &&
+                    seller
+                      ? false
+                      : true
+                  }
                 >
                   UPDATE
                 </button>

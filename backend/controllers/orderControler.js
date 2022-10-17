@@ -125,7 +125,7 @@ exports.deleteOrder = async (req, res, next) => {
     });
   }
 
-  await order.remove();
+  await Order.findOneAndRemove(req.params.id);
 
   res.status(200).json({
     success: true,

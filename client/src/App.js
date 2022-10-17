@@ -32,9 +32,21 @@ import ProductReviews from "./components/admin/productreviews/ProductReviews";
 import Slider from "./components/admin/slider/Slider";
 import { useDispatch, useSelector } from "react-redux";
 import { loadUser } from "./components/actions/authActions";
+import Categories from "./components/categories/Categories";
 import "./App.css";
 import { axios } from "axios";
-
+import Navbar from "./components/header/Navbar";
+import Women from "./components/categories/Women";
+import Men from "./components/categories/Men";
+import Kids from "./components/categories/Kids";
+import Beauty from "./components/categories/Beauty";
+import Accessories from "./components/categories/Accessories";
+import Electronics from "./components/categories/Electronics";
+import Mobile from "./components/categories/Mobile";
+import Jewellery from "./components/categories/Jewellery";
+import AboutUs from "./components/aboutus/AboutUs";
+import ContactUs from "./components/contact/ContactUs";
+import Shipping from "./components/shipping/Shipping";
 const stripe = loadStripe(
   "pk_test_51LopskSGAjDSZQyBVlYz24jYhviKM94BLmSCmiimOAre20S8Ti9RD2CF8BPfAsofbNl1fdmQK2UxyFXSPvzS0Tmm00PM0lilLG"
 );
@@ -52,7 +64,8 @@ function App() {
     <>
       <Elements stripe={stripe}>
         <BrowserRouter>
-          <Header />
+          <Navbar />
+
           <div className="">
             <Routes>
               <Route path="/" element={<Home />} />
@@ -60,18 +73,30 @@ function App() {
               <Route path="/search/:keyword" element={<Home />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Signup />} />
+              <Route path="/contact" element={<ContactUs />} />
+              <Route path="/about" element={<AboutUs />} />
+              <Route path="/shipping" element={<Shipping />} />
               <Route path="/me" element={<Profile />} />
               <Route path="/me/update" element={<UpdateProfile />} />
               <Route path="/password/update" element={<UpdatePassword />} />
               <Route path="/password/forgot" element={<ResetPassword />} />
               <Route path="/password/reset/:token" element={<NewPassword />} />
               <Route path="/cart" element={<Cart />} />
-              <Route path="/shipping" element={<ShippingInfo />} />
+              <Route path="/shippinginfo" element={<ShippingInfo />} />
               <Route path="/confirm" element={<Confirmorder />} />
               <Route path="/payment" element={<Payment />} />
               <Route path="/success" element={<PaymentSuccess />} />
               <Route path="/orders/me" element={<ListOrders />} />
               <Route path="/order/:id" element={<OrderDetails />} />
+              <Route path="/categories" element={<Categories />} />
+              <Route path="/category/women" element={<Women />} />
+              <Route path="/category/men" element={<Men />} />
+              <Route path="/category/kids" element={<Kids />} />
+              <Route path="/category/beauty" element={<Beauty />} />
+              <Route path="/category/accessories" element={<Accessories />} />
+              <Route path="/category/eletronic" element={<Electronics />} />
+              <Route path="/category/mobile" element={<Mobile />} />
+              <Route path="/category/jewellery" element={<Jewellery />} />
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/admin/products" element={<ProductsList />} />
               <Route path="/admin/product" element={<NewProduct />} />

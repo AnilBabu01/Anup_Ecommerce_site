@@ -4,6 +4,7 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import CallMadeIcon from "@mui/icons-material/CallMade";
+import { Link } from "react-router-dom";
 import "./Footer.css";
 const Footer = () => {
   return (
@@ -11,24 +12,48 @@ const Footer = () => {
       <div className="mainfooter">
         <div className="footercontent">
           <div className="phonecon">
-            <Typography variant="h4" style={{ fontWeight: "400" }}>
-              Instaphantom
+            <Typography variant="h6" style={{ fontWeight: "400" }}>
+              Products
             </Typography>
-            <div className="mardivcontent1">
-              <Typography>New generation social</Typography>
-              <Typography>media management</Typography>
-              <Typography>software</Typography>
+            <div className="mardivcontentlink">
+              <Link to="/categories">Women</Link>
+              <Link to="/category/men">Men</Link>
+              <Link to="/category/kids">Kids</Link>
+              <Link to="/category/beauty">Beauty</Link>
+              <Link to="/category/accessories">Accessories</Link>
+              <Link to="/category/eletronic">Electronic Devices</Link>
+              <Link to="/category/mobile">Mobile</Link>
+              <Link to="/category/jewellery">Jewellery</Link>
             </div>
           </div>
           <div className="phonecon">
             <Typography variant="h6" style={{ fontWeight: "400" }}>
+              Shipping Service
+            </Typography>
+            <div className="mardivcontentlink">
+              <a target="_blank" href="https://www.amazon.in">
+                Amazon
+              </a>
+              <a target="_blank" href="https://www.flipkart.com">
+                Flipkart
+              </a>
+              <a target="_blank" href="https://www.myntra.com/mantra">
+                mantra
+              </a>
+            </div>
+          </div>
+
+          <div className="phonecon">
+            <Typography variant="h6" style={{ fontWeight: "400" }}>
               Explore
             </Typography>
-            <div className="mardivcontent">
-              <Typography>Home</Typography>
-              <Typography>About us</Typography>
-              <Typography>FAQ</Typography>
-              <Typography>Register/Login</Typography>
+            <div className="mardivcontentlink">
+              <Link to="/">Home</Link>
+              <Link to="/about">About us</Link>
+              <Link to="/register">Register</Link>
+              <Link to="/login">Login</Link>
+              <Link to="/contact">Contact Us</Link>
+              <Link to="/shippingt">Shipping Service</Link>
             </div>
           </div>
           <div className="phonecon">
@@ -38,25 +63,6 @@ const Footer = () => {
             <div className="mardivcontent">
               <Typography>Tearm & Condition</Typography>
               <Typography>Privacy policy</Typography>
-            </div>
-          </div>
-          <div className="phonecon">
-            <Typography variant="h6" className="instatxt">
-              Business
-            </Typography>
-            <div className="mardivcontent">
-              <Typography>business@instaphantom.com</Typography>
-              <Typography>+91-7454808301</Typography>
-            </div>
-          </div>
-          <div className="phonecon">
-            <Typography variant="h6" className="instatxt">
-              Addreass
-            </Typography>
-            <div className="mardivcontent">
-              <Typography>News xyz market</Typography>
-              <Typography>Trisla Road, Panchkula</Typography>
-              <Typography>Punjab-0123456</Typography>
             </div>
           </div>
         </div>
@@ -77,14 +83,13 @@ const Footer = () => {
             </svg>
 
             <Typography className="right">
-              2022 instaphantom. All right reserved
+              2022 Nepalify-Kart. All right reserved
             </Typography>
           </div>
           <div>
             <Typography>
-              Made with{" "}
-              <img src="./images/dil.svg" alt="dil" className="dilimg" /> by
-              Nepalify-Kart Team
+              Made <img src="./images/dil.svg" alt="dil" className="dilimg" />{" "}
+              by Nepalify-Kart Team
             </Typography>
           </div>
         </div>
@@ -96,12 +101,6 @@ const Footer = () => {
           <div className="iconmain">
             <div className="icondiv5">
               <FacebookIcon />
-            </div>
-          </div>
-
-          <div className="iconmain">
-            <div className="icondiv5">
-              <TwitterIcon />
             </div>
           </div>
 

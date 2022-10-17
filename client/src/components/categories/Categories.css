@@ -1,0 +1,26 @@
+.catemaindiv{
+    margin-top: 5rem;
+    display: flex;
+    justify-content: space-evenly;
+    background: #a87a3b;
+    padding-top: 1rem;
+    padding-bottom: 2rem;
+    font-size: 20px;
+    color: white;
+    z-index: 2;
+}
+
+.linka{
+    color: red;
+}
+
+
+.onlnk{
+    color: green;
+}
+@media screen and (max-width: 780px) {
+  
+    
+
+   
+  }

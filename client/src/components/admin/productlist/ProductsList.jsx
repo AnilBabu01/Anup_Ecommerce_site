@@ -113,7 +113,7 @@ const ProductsList = () => {
     ] = `Bearer ${localStorage.getItem("token")}`;
 
     const data = await axios.delete(
-      `http://localhost:8080/api/admin/product/deleteProduct/${id}`
+      `${process.env.REACT_APP_URL}/api/admin/product/deleteProduct/${id}`
     );
 
     console.log("delete is", data.data.status);
@@ -127,7 +127,7 @@ const ProductsList = () => {
     <Fragment>
       <MetaData title={"All Products"} />
       <div className="row">
-        <div className="col-12 col-md-2">
+        <div className="col-12 col-md-2" style={{ marginTop: "4.8rem" }}>
           <Sidebar />
         </div>
 

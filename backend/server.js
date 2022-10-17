@@ -1,6 +1,7 @@
 const cloudinary = require("cloudinary");
 const connectDatabase = require("./config/db");
 const express = require("express");
+const Product = require("./models/product");
 const cookiesParser = require("cookie-parser");
 const errorMiddleware = require("./middlewares/errors");
 const bodyparser = require("body-parser");
@@ -11,7 +12,7 @@ const app = express();
 //allow all to requst domain
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: true,
     credentials: true,
     optionsSuccessStatus: 200,
   })
@@ -34,8 +35,17 @@ app.use("/api", order);
 app.use("/api", payment);
 app.use("/api", slider);
 
-app.get("/api", (req, res) => {
-  res.send("Api is working on Port ");
+app.get("/api", async (req, res) => {
+  try {
+    const products = await Product.find();
+
+    res.status(201).json({
+      status: true,
+      products: products,
+    });
+  } catch (error) {
+    console.log(error);
+  }
 });
 //middleware to handle errors
 app.use(errorMiddleware);
