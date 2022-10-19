@@ -1,0 +1,31 @@
+.addrendivbtn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 2rem;
+}
+.adddbutton{
+    margin: 5px;
+    background: #fa9c23;
+    color: white;
+    padding-left: 5px;
+    padding-right: 5px;
+    width: 130px;
+    height: 30px;
+    border-radius: 5px;
+}
+
+.adddbutton:focus{
+    outline: none;
+}
+
+.mainaddrental{
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.centerrental{
+    text-align: center;
+}

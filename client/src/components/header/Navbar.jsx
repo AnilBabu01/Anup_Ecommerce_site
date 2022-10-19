@@ -56,6 +56,16 @@ const Navbar = ({ history }) => {
         <ul className={isMobile ? style.mobilelinks : style.navlinks}>
           <li onClick={() => setisMobile(false)}>
             <NavLink
+              to="/rental"
+              className={({ isActive }) =>
+                isActive ? style.active : style.home
+              }
+            >
+              Rental Service
+            </NavLink>
+          </li>
+          <li onClick={() => setisMobile(false)}>
+            <NavLink
               to="/shipping"
               className={({ isActive }) =>
                 isActive ? style.active : style.home

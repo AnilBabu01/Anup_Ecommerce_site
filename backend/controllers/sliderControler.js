@@ -53,7 +53,7 @@ exports.deleteimg = async (req, res) => {
       console.log("successfully deleted /tmp/hello", str);
     }
     console.log(img.image);
-    img.remove();
+    await Slider.findOneAndRemove(req.params.id);
     res.status(200).json({ sataus: true, msg: "img deleted successfully" });
   } catch (error) {
     console.log(error);

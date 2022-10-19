@@ -9,7 +9,7 @@ const Slider = ({ history }) => {
   const alert = useAlert();
   const [imagesPreview, setImagesPreview] = useState([]);
   const [imagess, setimagess] = useState("");
-  const name = "anil";
+
   const submitHandler = async (e) => {
     e.preventDefault();
     axios.defaults.headers.post[

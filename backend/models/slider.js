@@ -5,6 +5,7 @@ const { Schema } = monoose;
 const Slidermodel = new Schema({
   image: {
     type: String,
+    required: true,
   },
 });
 

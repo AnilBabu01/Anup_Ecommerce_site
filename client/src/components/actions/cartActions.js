@@ -30,6 +30,35 @@ export const addItemToCart = (id, quantity) => async (dispatch, getState) => {
   localStorage.setItem("cartItems", JSON.stringify(getState().cart.cartItems));
 };
 
+export const addItemToCartrental =
+  (id, quantity) => async (dispatch, getState) => {
+    axios.defaults.headers.get[
+      "Authorization"
+    ] = `Bearer ${localStorage.getItem("token")}`;
+
+    const { data } = await axios.get(
+      `${process.env.REACT_APP_URL}/api/rental/getsinglerental/${id}`
+    );
+
+    dispatch({
+      type: ADD_TO_CART,
+      payload: {
+        product: data.product._id,
+        name: data.product.productname,
+        price: data.product.price,
+        image: data.product.image,
+
+        quantity,
+      },
+    });
+
+    console.log("hello");
+    localStorage.setItem(
+      "cartItems",
+      JSON.stringify(getState().cart.cartItems)
+    );
+  };
+
 export const removeItemFromCart = (id) => async (dispatch, getState) => {
   dispatch({
     type: REMOVE_ITEM_CART,

@@ -1,0 +1,14 @@
+.shippinginfomain{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 3rem;
+}
+
+
+@media screen and (max-width:780px) {
+    
+.reciept{
+    width:300px ;
+}
+}

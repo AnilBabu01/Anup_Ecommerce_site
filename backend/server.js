@@ -29,12 +29,16 @@ const user = require("./routes/auth");
 const order = require("./routes/order");
 const payment = require("./routes/payment");
 const slider = require("./routes/slider");
+const shipping = require("./routes/shipping");
+const rental = require("./routes/retal");
+
 app.use("/api/auth", user);
 app.use("/api", product);
 app.use("/api", order);
 app.use("/api", payment);
 app.use("/api", slider);
-
+app.use("/api", shipping);
+app.use("/api", rental);
 app.get("/api", async (req, res) => {
   try {
     const products = await Product.find();

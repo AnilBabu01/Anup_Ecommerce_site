@@ -47,6 +47,16 @@ import Jewellery from "./components/categories/Jewellery";
 import AboutUs from "./components/aboutus/AboutUs";
 import ContactUs from "./components/contact/ContactUs";
 import Shipping from "./components/shipping/Shipping";
+import Rental from "./components/rental/Rental";
+import Shippingadmin from "./components/admin/shipping/Shippingadmin";
+import Shippinginfoadmin from "./components/admin/shipping/Shippinginfoadmin";
+import Updateshipping from "./components/admin/shipping/updateshipping";
+import RentalDetails from "./components/rental/RentalDetails";
+import Addrental from "./components/rental/Addrental";
+import Deleterental from "./components/rental/Deleterental";
+import Rentaladmin from "./components/admin/rental/Rentaladmin";
+import RentalUpdate from "./components/admin/rental/RentalUpdate";
+import RentalDetail from "./components/admin/rental/RentalDetail";
 const stripe = loadStripe(
   "pk_test_51LopskSGAjDSZQyBVlYz24jYhviKM94BLmSCmiimOAre20S8Ti9RD2CF8BPfAsofbNl1fdmQK2UxyFXSPvzS0Tmm00PM0lilLG"
 );
@@ -75,6 +85,7 @@ function App() {
               <Route path="/register" element={<Signup />} />
               <Route path="/contact" element={<ContactUs />} />
               <Route path="/about" element={<AboutUs />} />
+              <Route path="/rental" element={<Rental />} />
               <Route path="/shipping" element={<Shipping />} />
               <Route path="/me" element={<Profile />} />
               <Route path="/me/update" element={<UpdateProfile />} />
@@ -97,6 +108,9 @@ function App() {
               <Route path="/category/eletronic" element={<Electronics />} />
               <Route path="/category/mobile" element={<Mobile />} />
               <Route path="/category/jewellery" element={<Jewellery />} />
+              <Route path="/rentaldetails/:id" element={<RentalDetails />} />
+              <Route path="/addrental" element={<Addrental />} />
+              <Route path="/deleterental" element={<Deleterental />} />
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/admin/products" element={<ProductsList />} />
               <Route path="/admin/product" element={<NewProduct />} />
@@ -107,6 +121,24 @@ function App() {
               <Route path="/admin/user/:id" element={<UpdateUser />} />
               <Route path="/admin/reviews" element={<ProductReviews />} />
               <Route path="/admin/slider" element={<Slider />} />
+              <Route path="/admin/shipping" element={<Shippingadmin />} />
+              <Route path="/admin/rentaladmin" element={<Rentaladmin />} />
+              <Route
+                path="/admin/shippingupdate/:id"
+                element={<Updateshipping />}
+              />
+              <Route
+                path="/admin/shippingdetails/:id"
+                element={<Shippinginfoadmin />}
+              />
+              <Route
+                path="/admin/rentalUpdate/:id"
+                element={<RentalUpdate />}
+              />
+              <Route
+                path="/admin/rentalDetails/:id"
+                element={<RentalDetail />}
+              />
             </Routes>
           </div>
           <Footer />
