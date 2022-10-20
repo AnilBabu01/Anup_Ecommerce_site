@@ -154,6 +154,9 @@ const Navbar = ({ history }) => {
                 <Link className="dropdown-item" to="/shipping">
                   <NetworkPingIcon /> Shipping service
                 </Link>
+                <Link className="dropdown-item" to="/rental">
+                  <NetworkPingIcon /> Rental service
+                </Link>
 
                 {isAuthenticated ? (
                   <Link

@@ -1,10 +1,12 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
+import axios from "axios";
 import MetaData from "../../metadata/Metadata";
 import Loader from "../../loader/Loader";
 import Sidebar from "../sidebar/Sidebar";
 import { getAdminProducts } from "../../actions/productActions";
+import { allOrders } from "../../actions/orderActions";
+import { allUsers } from "../../actions/authActions";
 import { useDispatch, useSelector } from "react-redux";
 
 const Dashboard = () => {
@@ -12,7 +14,25 @@ const Dashboard = () => {
   const { products } = useSelector((state) => state.products);
   const { loading, error, orders } = useSelector((state) => state.allOrders);
   const { users } = useSelector((state) => state.allUsers);
+  const [shippings, setshippings] = useState([]);
+  const [rental, setrental] = useState([]);
+  const getallshipping = async () => {
+    axios.defaults.headers.get[
+      "Authorization"
+    ] = `Bearer ${localStorage.getItem("token")}`;
 
+    const data = await axios.get(
+      `${process.env.REACT_APP_URL}/api/shiping/get`
+    );
+
+    setshippings(data.data.shippings);
+
+    const dataa = await axios.get(
+      `${process.env.REACT_APP_URL}/api/rental/getAll`
+    );
+
+    setrental(dataa.data.rental);
+  };
   let outOfStock = 0;
   products.forEach((product) => {
     if (product.stock === 0) {
@@ -22,6 +42,9 @@ const Dashboard = () => {
 
   useEffect(() => {
     dispatch(getAdminProducts);
+    dispatch(allOrders());
+    dispatch(allUsers());
+    getallshipping();
   }, [dispatch]);
 
   return (
@@ -119,6 +142,54 @@ const Dashboard = () => {
                       <br /> <b>{outOfStock}</b>
                     </div>
                   </div>
+                  <Link
+                    className="card-footer text-white clearfix small z-1"
+                    to="/admin/users"
+                  >
+                    <span className="float-left">View Details</span>
+                    <span className="float-right">
+                      <i className="fa fa-angle-right"></i>
+                    </span>
+                  </Link>
+                </div>
+              </div>
+              <div className="col-xl-3 col-sm-6 mb-3">
+                <div className="card text-white bg-info o-hidden h-100">
+                  <div className="card-body">
+                    <div className="text-center card-font-size">
+                      Shipping Product
+                      <br /> <b>{shippings && shippings.length}</b>
+                    </div>
+                  </div>
+                  <Link
+                    className="card-footer text-white clearfix small z-1"
+                    to="/admin/shipping"
+                  >
+                    <span className="float-left">View Details</span>
+                    <span className="float-right">
+                      <i className="fa fa-angle-right"></i>
+                    </span>
+                  </Link>
+                </div>
+              </div>
+
+              <div className="col-xl-3 col-sm-6 mb-3">
+                <div className="card text-white bg-warning o-hidden h-100">
+                  <div className="card-body">
+                    <div className="text-center card-font-size">
+                      Rental Product
+                      <br /> <b>{rental && rental.length}</b>
+                    </div>
+                  </div>
+                  <Link
+                    className="card-footer text-white clearfix small z-1"
+                    to="/admin/rentaladmin"
+                  >
+                    <span className="float-left">View Details</span>
+                    <span className="float-right">
+                      <i className="fa fa-angle-right"></i>
+                    </span>
+                  </Link>
                 </div>
               </div>
             </div>

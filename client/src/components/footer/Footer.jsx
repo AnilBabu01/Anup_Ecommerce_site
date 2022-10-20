@@ -42,6 +42,14 @@ const Footer = () => {
               </a>
             </div>
           </div>
+          <div className="phonecon">
+            <Typography variant="h6" style={{ fontWeight: "400" }}>
+              Rental Service
+            </Typography>
+            <div className="mardivcontentlink">
+              <Link to="/rental">Rental Products</Link>
+            </div>
+          </div>
 
           <div className="phonecon">
             <Typography variant="h6" style={{ fontWeight: "400" }}>
